@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Portfolio Website</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <link rel="stylesheet" href="">
+    <style>
+      * {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+      .max-width {
+        max-width: 1300px;
+        padding: 0px 80px;
+        margin: auto;
+      }
+      .navbar {
+        position: fixed;
+        width: 100%;
+        /* background: crimson; */
+        padding: 30px 0;
+        /* color:rgb(191, 255, 62); */
+        transition: all 0.3s ease;
+      }
+      .navbar.sticky {
+        padding: 15px 0;
+        background: crimson;
+      }
+      .navbar .max-width {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .navbar .logo a {
+        color: white;
+        font-size: 35px;
+        font-weight: 600;
+      }
+
+      .navbar .logo a span {
+        color: aquamarine;
+      }
+      .navbar .menu li {
+        list-style: none;
+        display: inline-block;
+      }
+      .navbar .menu li a {
+        color: rgb(168 249 222);
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 25px;
+        transition: color 0.3s ease;
+      }
+      .navbar .menu li a:hover {
+        color: crimson;
+      }
+      .navbar.sticky .menu li a:hover {
+        color: white;
+      }
+      .navbar .menu-btn{
+        color: white;
+        font-size: 23px;
+        cursor:pointer;
+        display: none;
+
+      }
+      .scroll-up-btn{
+        position: fixed;
+        height: 45px;
+        width: 42px;
+        background:crimson;
+        right: 30px;
+        bottom:10px;
+        text-align: center;
+        line-height:45px;
+        color:#fff;
+        z-index:9999;
+        font-size: 30px;
+        border-radius: 6px;
+        cursor: pointer;
+        opacity:0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+      .scroll-up-btn.show{
+        bottom:30px;
+        opacity:1;
+        pointer-events: auto;
+      }
+      .home {
+        display: flex;
+        background: url("img1.jpg") no-repeat center;
+        height: 100vh;
+        color: white;
+      }
+      .home .max-width {
+        margin: auto 0 auto 40px;
+      }
+      .home .home-content .text-1 {
+        color: black;
+        font-size: 30px;
+      }
+      .home .home-content .text-2 {
+        color: black;
+        font-size: 75px;
+        font-weight: 600;
+        margin-left: -3px;
+      }
+      .home .home-content .text-3 {
+        color: black;
+        font-size: 40px;
+        margin: 5px 0;
+      }
+      .home .home-content .text-3 span {
+        color: aquamarine;
+        font-weight: 500;
+      }
+      .home .home-content a{
+        display: inline-block;
+        background-color: crimson;
+        color: #fff;
+        font-size: 17px;
+        padding:12px 36px;
+        margin-top:20px;
+        border:1px solid crimson;
+        border-radius:5px;
+        transition: all 0.3s ease;
+      }
+      .home .home-content a:hover{
+        color:#fff;
+        background:rgb(95, 171, 221);
+        
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      section{
+        padding:100px 0;
+      }
+      .about{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        
+
+      }
+      .about .title{
+        position: relative;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        margin-bottom:60px;
+        padding-bottom:20px;
+
+
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+      .about .title::before{
+        content:"";
+        position: absolute;
+        bottom:0px;
+        left:50%;
+        width:180px;
+        height:3px;
+        background: #111;
+        transform:translateX(-50%);            /*a*/
+
+      }
+      .about .title::after{
+        content:"who am i";
+        position: absolute;
+        bottom:-7px;
+        left:50%;
+        padding:5px;
+        font-size:20px;
+        color:crimson;
+        background: white;
+        transform: translateX(-50%);
+      
+        /* height:3px; */
+        
+             /*a*/
+
+      }
+      .about .about-content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: space-between;
+        
+      }
+      .about .about-content .left{
+        width:45%;
+
+        
+      }
+      .about .about-content .left img{
+        height:400px;
+        width:400px;
+        object-fit:cover;
+        border-radius: 4px;
+      }
+      .about .about-content .right{
+        width:55%;
+      }
+      /* .about .about-content .left img{
+        height:400px;
+        width:400px;
+        object-fit:cover;
+        border-radius: 4px;
+      } */
+      .about .about-content .right .text{
+        font-size:25px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .about .about-content .right .text span{
+        color:crimson;
+      }
+      .about .about-content .right p{
+        text-align: justify;
+
+      }
+      .about .about-content .right a{
+        display: inline-block;
+        background-color: crimson;
+        color: #fff;
+        font-size: 17px;
+        padding:1px 30px;
+        margin-top:20px;
+        border:1px solid crimson;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        
+      }
+      .about .about-content .right a:hover{
+        color:white;
+        background: green;        
+
+      }
+      .about .about-content li{
+        /* padding:auto; */
+        font-size: 20px;
+      }
+
+      /* skill styling */
+      .skill .title{
+        position: relative;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        margin-bottom:60px;
+        padding-bottom:20px;
+
+      }
+      .skill .title::before{
+
+        content:"";
+        position: absolute;
+        bottom:0px;
+        left:50%;
+        width:180px;
+        height:3px;
+        background: #111;
+        transform:translateX(-50%); 
+
+      }
+      .skill .title::after{
+        content:"what i know";
+        position: absolute;
+        bottom:-7px;
+        left:50%;
+        padding:5px;
+        font-size:20px;
+        color:crimson;
+        background: white;
+        transform: translateX(-50%);
+      
+        /* height:3px; */
+        
+             /*a*/
+
+      }
+      .skill .skill-content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: space-between;
+        
+      }
+      .skill .skill-content .left{
+        width:45%;
+
+        
+      }
+      .skill .skill-content .left img{
+        height:400px;
+        width:400px;
+        object-fit:cover;
+        border-radius: 4px;
+      }
+      .skill .skill-content .right{
+        width:55%;
+      }
+      /* .skill .skill-content .left img{
+        height:400px;
+        width:400px;
+        object-fit:cover;
+        border-radius: 4px;
+      } */
+      .skill .skill-content .right .text{
+        font-size:25px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      /* .skill .skill-content .right .text span{
+        color:crimson;
+      } */
+      .skill .skill-content .right p{
+        text-align: justify;
+
+      }
+      .skill .skill-content li span{
+        color:crimson;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .skill .skill-content li{
+        font-size:20px;
+      }
+      
+     
+      
+      /* achivement */
+      .achievement .title{
+        position: relative;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        margin-bottom:60px;
+        padding-bottom:20px;
+
+      }
+      .achievement .title::before{
+
+        content:"";
+        position: absolute;
+        bottom:0px;
+        left:50%;
+        width:180px;
+        height:3px;
+        background: #111;
+        transform:translateX(-50%); 
+
+      }
+      .achievement .title::after{
+        content:"my other intro";
+        position: absolute;
+        bottom:-7px;
+        left:50%;
+        padding:5px;
+        font-size:20px;
+        color:crimson;
+        background: white;
+        transform: translateX(-50%);
+
+      }
+      .achievement .achievement-content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items:center;
+        justify-content: space-between;
+        
+      }
+      .achievement .about-content .left{
+        width: 45%;
+
+      }
+      .achievement .achievement-content .left img{
+        height:800px;
+        width:400px;
+        object-fit:cover;
+        border-radius: 4px;
+      }
+      .achievement .achievement-content .right{
+        width:55%;
+
+      }
+      .achievement .achievement-content .right .text{
+        font-size:25px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .achievement .achievement-content .right p{
+        text-align: justify;
+
+      }
+      .achievement .achievement-content .text span{
+        color:crimson;
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .achievement .achievement-content li span{
+        color: crimson;
+        font-size: 22px;
+        font-weight: 600;
+
+      }
+      .achievement .achievement-content li{
+        font-size:20px;
+        font-weight: 700;
+      }
+      /* footer section */
+      footer{
+        background: black;
+        padding:20px 23px;
+        color:white;
+
+      }
+      footer span a{
+        color:crimson;
+        font-size: 20px;
+        /* justify-content: center; */
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </style>
+  </head>
+  <body>
+    <div class="scroll-up-btn">
+      <i class="fas fa-angle-up"></i>
+    </div>
+    <nav class="navbar">
+      <div class="max-width">
+        <div class="logo">
+          <a href="#">Portfo<span>lio.</span></a>
+        </div>
+        <ul class="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">My Intro</a></li>
+          <li><a href="#skill">Skills</a></li>
+          <!-- <li><a href="#"></a></li> -->
+          <li><a href="#achievement">Achievements</a></li>
+          <!-- <li><a href="#">Contact</a></li> -->
+          <!-- <li><a href="#"></a></li> -->
+        </ul>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <section class="home" id="home">
+      <div class="max-width">
+        <div class="home-content">
+          <div class="text-1">Hello, my name is</div>
+          <div class="text-2">Vivek Baidya</div>
+          <div class="text-3">
+            And I'm <span class="typing"></span>
+          </div>
+          <!-- <a href="#">Hire-Me</a> -->
+        </div>
+      </div>
+    </section>
+    
+
+    
+
+
+
+
+
+
+    <section class="about" id="about">
+      <div class="max-width">
+        <h2 class="title">My Intro</h2>
+        <div class="about-content">
+          <div class="column left">
+            <img src="img4.jpg" alt="" srcset="">
+          </div>
+          <div class="column right">
+            <div class="text">I'm Vivek Baidya and I'm a <span>Student of NIT Silchar</span></div>
+            <p>
+              <ul>
+              <li>I'm from Guwahati,Assam</li>
+              <li>I had completed my schooling from Delhi Public School, Guwahati</li>
+              <li>I got 89% and 91% respectively on my AISSE and AISSCE Examination</li>
+              <li>Now currently studying Electronics And Communication Engineering from NIT Silchar</li>
+              <li>I'm a Full Stack Web Developer Enthusiast</li>
+              <li>And also a professional guitarist</li>
+              </ul>
+            </p>
+            
+            <!-- <a href="#">Download CV</a> -->
+          </div>
+
+        </div>
+      </div>
+      
+    </section>
+
+
+
+
+
+
+
+
+
+    <section class="skill" id="skill">
+      <div class="max-width">
+        <h2 class="title">Skills</h2>
+        <div class="skill-content">
+          <div class="column left">
+            <img src="img6.jpg" alt="">
+          </div>
+          <div class="column right">
+            <div class="text">What I know</div>
+            <p>
+              <ul>
+              <li>Programming Language: <span>JAVA, C/C++</span></li>
+              <li>Data Structures and <span>Algorithm</span></li>
+              <li>Competitive <span>Programmer</span></li>
+              <li>Web Development</li>
+              <li>Also familiar with python and <span>MySql</span></li>
+              <li>Guitarist</li></ul>
+            </p>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="achievement" id="achievement">
+      <div class="max-width">
+        <h2 class="title">Achievements</h2>
+        <div class="achievement-content">
+          <div class="column left">
+            <img src="img7.jpg" alt="" srcset="">
+            
+          </div>
+          <div class="column right">
+            <div class="text">Extracurricular <span>Activities</span></div>
+            <p>
+              <ul>
+              <li><span>2 star</span> coder at CodeChef</li>
+              <li><span>4 star</span> at HackerRank</li>
+              <li><span>Graded guitarist</span> from London College of Music Examinations</li>
+
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <span>Created By <a href="#">Vivek Baidya</a></span>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
